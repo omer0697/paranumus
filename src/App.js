@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { getExchangeRates } from './utils/generalFunctions';
+import CurrencyCard from './components/CurrencyCard';
 
 const TOKEN_URL = "https://test.nakitakisimiz.com/wapi/token";
 const USER_NAME = "webapi@demosirketi"
@@ -34,6 +35,7 @@ async function tokenHandler() {
   return (
     <div className="App">
       <h1>Token: {token}</h1>
+      <CurrencyCard />
     </div>
   );
 }
