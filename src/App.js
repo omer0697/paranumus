@@ -11,9 +11,6 @@ function App() {
 const [token, setToken] = useState(null);
 const [exchangeRates, setExchangeRates] = useState(null);
 
-console.log(token, "token");
-console.log(exchangeRates, "exchangeRates");
-
 useEffect(() => {
   tokenHandler();
 }, []);
