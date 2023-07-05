@@ -2,7 +2,7 @@ import React from 'react'
 
 function CurrencyCard() {
   return (
-    <div>
+    <div className='text-4xl'>
       currencyCard
     </div>
   )
