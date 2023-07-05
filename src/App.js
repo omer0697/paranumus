@@ -1,23 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { getExchangeRates } from './utils/generalFunctions';
+
+const TOKEN_URL = "https://test.nakitakisimiz.com/wapi/token";
+const USER_NAME = "webapi@demosirketi"
+const PASSWORD = "Magnimore123."
+const EXCHANGE_RATE_URL = "https://test.nakitakisimiz.com/wapi/cmdtbl/dCompanyExchangeRate";
 
 function App() {
+const [token, setToken] = useState(null);
+const [exchangeRates, setExchangeRates] = useState(null);
+
+console.log(token, "token");
+console.log(exchangeRates, "exchangeRates");
+
+useEffect(() => {
+  tokenHandler();
+}, []);
+
+async function tokenHandler() {
+  // to get token
+    const {data} = await axios.post(TOKEN_URL, {
+      "grant_type": "password",
+      "username": USER_NAME,
+      "password": PASSWORD
+    }, {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    });
+    setToken(data.access_token);
+    // to get exchange rates
+    getExchangeRates(data.access_token, EXCHANGE_RATE_URL, setExchangeRates);
+}
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Token: {token}</h1>
     </div>
   );
 }
