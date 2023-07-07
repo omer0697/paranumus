@@ -8,5 +8,6 @@ export async function getExchangeRates(token, EXCHANGE_RATE_URL,setState) {
       }
     });
     setState(data);
+    console.log(data);
 }
 
