@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setToken, setExchangeRates } from './stores/reducers';
 import Navbar from './components/Navbar';
+import CurrencyCalculatorCard from './components/CurrencyCalculatorCard';
 
 const TOKEN_URL = 'https://test.nakitakisimiz.com/wapi/token';
 const USER_NAME = 'webapi@demosirketi';
@@ -60,6 +61,7 @@ const App = () => {
   return (
     <div className="App">
       <Navbar />
+      <CurrencyCalculatorCard />
     </div>
   );
 };

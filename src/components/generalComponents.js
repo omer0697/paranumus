@@ -1,4 +1,5 @@
 import { TextField } from "@mui/material";
+import { LoadingButton } from '@mui/lab';
 
 const currencies = [
     {
@@ -23,36 +24,41 @@ const currencies = [
     },
 ];
 
-export function CurrencyInput({currency, setCurrency, amount, setAmount}) {
+export function CurrencyWithFlag({currency, setCurrency}) {
     return (
-        <div className='flex flex-col items-center'>
-            <TextField
-                id="outlined-select-currency-native"
-                select
-                label="Select"
-                value={currency}
-                onChange={(e) => setCurrency(e.target.value)}
-                SelectProps={{
-                    native: true,
-                }}
-                helperText="Please select your currency"
-                sx={{ width: '25ch' }}
-            >
-                {currencies.map((option) => (
-                    <option key={option.value} value={option.value}>
-                        {option.label}
-                    </option>
-                ))}
-            </TextField>
+        <TextField
+            id="outlined-select-currency-native"
+            select
+            value={currency}
+            onChange={(e) => setCurrency(e.target.value)}
+            SelectProps={{
+                native: true,
+            }}
+            helperText="Please select your currency"
+            variant="outlined"
+            className="w-full"
+        >
+            {currencies.map((option) => (
+                <option key={option.value} value={option.value} className="flex">
+                    {option.label}
+                    {option.value}
+                </option>
+            ))}
+        </TextField>
+    )
+}
 
-            <TextField
-                id="outlined-basic"
-                label="Amount"
-                variant="outlined"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                sx={{ width: '25ch' }}
-            />
-        </div>
+export function CommonButton({loading, onCLick, text}){
+    return (
+        <LoadingButton
+            loading={loading}
+            loadingPosition="start"
+            variant="contained"
+            color="primary"
+            className="w-52 h-10 pt-1"
+            onClick={onCLick}
+        >
+            {text}
+        </LoadingButton>
     )
 }

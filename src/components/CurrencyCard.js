@@ -2,19 +2,7 @@ import React from 'react'
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import TrendingDownIcon from '@mui/icons-material/TrendingDown';
 import { useSelector } from 'react-redux';
-
-function TrendingSelector({trending}) {
-  // trending: 'up', 'down', 'none'
-    if (trending === 'up') {
-        return <TrendingUpIcon className='text-green-500'/>
-    } else if (trending === 'down') {
-        return <TrendingDownIcon className='text-red-500'/>
-    } else {
-        return <TrendingUpIcon className='text-gray-500'/>
-    }
-}
-
-
+import Loading from './Loading';
 
 function CurrencyCard() {
   const data = useSelector((state) => state.app.exchangeRates);
@@ -22,7 +10,7 @@ function CurrencyCard() {
   console.log(data);
 
   return (
-    <div className='flex flex-row gap-4 border-2 justify-center items-center'>
+    <div className='flex flex-row gap-4 justify-center items-center w-96'>
         {data ? data.map((item,index) => {
             return (
               <div className='flex row items-center gap-2'>
@@ -33,9 +21,8 @@ function CurrencyCard() {
                 </div>
               </div>
             )
-        }) : null}
+        }) : <Loading loading={true}/>}
     </div>
-
   )
 }
 
