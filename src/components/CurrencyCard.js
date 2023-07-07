@@ -7,8 +7,6 @@ import Loading from './Loading';
 function CurrencyCard() {
   const data = useSelector((state) => state.app.exchangeRates);
 
-  console.log(data);
-
   return (
     <div className='flex flex-row gap-4 justify-center items-center w-96'>
         {data ? data.map((item,index) => {
