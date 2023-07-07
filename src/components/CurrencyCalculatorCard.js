@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import { TextField } from '@mui/material';
 import { CommonButton, CurrencyWithFlag } from './generalComponents';
 import SyncAltIcon from '@mui/icons-material/SyncAlt';
 import { useSelector } from 'react-redux';
-import { useCallback } from 'react';
 
 const currencyHeader = [
     {
@@ -32,21 +31,19 @@ function CurrencyCalculatorCard() {
     const [toCurrency, setToCurrency] = useState('EUR');
     const exchangeRates = useSelector((state) => state.app.exchangeRates);
 
-    console.log(typeof(exchangeRates));
-
     function changeRates() {
         setFromCurrency(toCurrency);
         setToCurrency(fromCurrency);
     }
 
-    const currencyCalculator = useCallback(() => {
-        if (exchangeRates){
-            const fromCurrencyRate = exchangeRates.find((item) => item.NameEn === fromCurrency);
-            const toCurrencyRate = exchangeRates.find((item) => item.NameEn === toCurrency);
+    function currencyCalculator() {
+        if (exchangeRates) {
+            const fromCurrencyRate = exchangeRates.find(item => item.NameEn === fromCurrency);
+            const toCurrencyRate = exchangeRates.find(item => item.NameEn === toCurrency);
         
             return (amount * toCurrencyRate.MidRate) / fromCurrencyRate.MidRate;
         }
-      }, [amount, exchangeRates, fromCurrency, toCurrency]);
+    }   
 
   return (
     <div className='flex flex-col border-2 mt-14 mx-40 gap-6 rounded-2xl overflow-hidden'> 
