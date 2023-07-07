@@ -32,7 +32,7 @@ function CurrencyCalculatorCard() {
     const [toCurrency, setToCurrency] = useState('EUR');
     const exchangeRates = useSelector((state) => state.app.exchangeRates);
 
-    console.log(exchangeRates);
+    console.log(typeof(exchangeRates));
 
     function changeRates() {
         setFromCurrency(toCurrency);
@@ -40,10 +40,12 @@ function CurrencyCalculatorCard() {
     }
 
     const currencyCalculator = useCallback(() => {
-        const fromCurrencyRate = exchangeRates.find((item) => item.NameEn === fromCurrency);
-        const toCurrencyRate = exchangeRates.find((item) => item.NameEn === toCurrency);
-      
-        return (amount * toCurrencyRate.MidRate) / fromCurrencyRate.MidRate;
+        if (exchangeRates){
+            const fromCurrencyRate = exchangeRates.find((item) => item.NameEn === fromCurrency);
+            const toCurrencyRate = exchangeRates.find((item) => item.NameEn === toCurrency);
+        
+            return (amount * toCurrencyRate.MidRate) / fromCurrencyRate.MidRate;
+        }
       }, [amount, exchangeRates, fromCurrency, toCurrency]);
 
   return (
