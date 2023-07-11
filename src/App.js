@@ -12,10 +12,6 @@ const EXCHANGE_RATE_URL = 'https://test.nakitakisimiz.com/wapi/cmdtbl/dCompanyEx
 
 const App = () => {
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.app.token);
-  const exchangeRates = useSelector((state) => state.app.exchangeRates);
-
-  console.log('token:', token, 'exchangeRates:', exchangeRates);
 
   useEffect(() => {
     tokenHandler();
@@ -51,8 +47,7 @@ const App = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-
-      console.log('exchange rates:', data);
+      
       data.push({
         NameEn: 'TRY',
         MidRate: 1.0000,

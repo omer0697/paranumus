@@ -1,7 +1,7 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, {useState } from 'react'
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import { TextField } from '@mui/material';
-import { CommonButton, CurrencyWithFlag } from './generalComponents';
+import {CurrencyWithFlag } from './generalComponents';
 import SyncAltIcon from '@mui/icons-material/SyncAlt';
 import { useSelector } from 'react-redux';
 
@@ -40,7 +40,6 @@ function CurrencyCalculatorCard() {
         if (exchangeRates) {
             const fromRate = exchangeRates.find((item) => item.NameEn === fromCurrency).MidRate;
             const toRate = exchangeRates.find((item) => item.NameEn === toCurrency).MidRate;
-            console.log(fromRate, toRate);
             return (amount * fromRate / toRate).toFixed(2);
         }
     }
