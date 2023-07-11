@@ -52,6 +52,12 @@ const App = () => {
         },
       });
 
+      console.log('exchange rates:', data);
+      data.push({
+        NameEn: 'TRY',
+        MidRate: 1.0000,
+      });
+
       dispatch(setExchangeRates(data));
     } catch (error) {
       console.error('Error fetching exchange rates:', error);
