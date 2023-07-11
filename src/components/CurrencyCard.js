@@ -9,7 +9,10 @@ function CurrencyCard() {
 
   return (
     <div className='flex flex-row gap-4 justify-center items-center w-[500px] h-24'>
-        {data ? data.map((item,index) => {
+        {data ? data.map((item,index) => { 
+            if (item.NameEn === 'TRY'){
+              return null;
+            }
             return (
               <div className='flex flex-row items-center gap-2 w-full'>
                 {index % 2 === 0 ? <TrendingUpIcon className='text-green-500' fontSize='large'/> : <TrendingDownIcon className='text-red-500' fontSize='large'/>}
