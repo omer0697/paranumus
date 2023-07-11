@@ -22,6 +22,10 @@ const currencies = [
         value: 'CHF',
         label: 'CHF',
     },
+    {
+        value:"TRY",
+        label:"₺"
+    },
 ];
 
 export function CurrencyWithFlag({currency, setCurrency}) {

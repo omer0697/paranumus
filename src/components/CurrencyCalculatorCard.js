@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import { TextField } from '@mui/material';
 import { CommonButton, CurrencyWithFlag } from './generalComponents';
@@ -27,10 +27,10 @@ const currencyHeader = [
 
 function CurrencyCalculatorCard() {
     const [amount, setAmount] = useState('');
-    const [fromCurrency, setFromCurrency] = useState('USD');
+    const [fromCurrency, setFromCurrency] = useState('TRY');
     const [toCurrency, setToCurrency] = useState('EUR');
     const exchangeRates = useSelector((state) => state.app.exchangeRates);
-
+    
     function changeRates() {
         setFromCurrency(toCurrency);
         setToCurrency(fromCurrency);
@@ -38,15 +38,15 @@ function CurrencyCalculatorCard() {
 
     function currencyCalculator() {
         if (exchangeRates) {
-            const fromCurrencyRate = exchangeRates.find(item => item.NameEn === fromCurrency);
-            const toCurrencyRate = exchangeRates.find(item => item.NameEn === toCurrency);
-        
-            return (amount * toCurrencyRate.MidRate) / fromCurrencyRate.MidRate;
+            const fromRate = exchangeRates.find((item) => item.NameEn === fromCurrency).MidRate;
+            const toRate = exchangeRates.find((item) => item.NameEn === toCurrency).MidRate;
+            console.log(fromRate, toRate);
+            return (amount * fromRate / toRate).toFixed(2);
         }
-    }   
+    }
 
   return (
-    <div className='flex flex-col border-2 mt-14 mx-40 gap-6 rounded-2xl overflow-hidden'> 
+    <div className='flex flex-col border-2 shadow-xl mt-14 mx-40 gap-6 rounded-2xl overflow-hidden'> 
         <div className='flex flex-row h-16 '>
             {currencyHeader.map((item) => {
                 return (
